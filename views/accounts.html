@@ -1,0 +1,149 @@
+<style>
+
+
+.right{
+	margin-top:8px;
+}
+#content{
+    margin-top: 80px;
+}
+.bg3{
+  margin-top:250px;
+  width:100%;
+}
+
+    footer.bg3 {
+        margin-top: 50px;
+    }
+    
+.col-md-2{
+	color:#000000;
+	font-family:ff-clan-web-pro,"Helvetica Neue",Helvetica,sans-serif;
+	font-size:1em;
+	cursor:hand;
+ text-decoration:none;
+}
+.col-md-2 a{
+	color:#000000;
+}
+.col-md-2 a:hover{
+	text-decoration:none;
+	color:#ff0000;
+}
+.col-md-2 a{
+/*	color:#000000;*/
+    color: white;
+    font-size: 15px;
+	cursor:pointer;
+}
+
+#head {
+    font-family: 'Titillium Web', sans-serif;
+    margin-top: -15px;
+    color: #222;
+    font-weight: 600;
+}
+
+.head-content {
+    font-family: 'Titillium Web', sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 5px;
+    margin-top: 20px;
+    color: #222;
+}
+
+.new{
+  font-size: 15px;
+  font-family:"Roboto", sans-serif;
+    color: #333;
+}
+
+.table td {
+    font-family: "Roboto", sans-serif;
+}
+
+.table td:nth-child(odd) {
+    display: inline-block;
+    width: 120%;
+    font-weight: 500;
+}
+
+.img-wrapper {
+    margin: 13% 0 13% 0;
+}
+
+@media (max-width: 992px) {
+    .panel-body .user-pic {
+        width: 30%;
+        display: block;
+        margin: auto;
+        margin-bottom: 40px;
+    }
+    .img-wrapper {
+        margin: 7% 0 7% 0;
+    }
+}
+
+@media (max-width: 400px) {
+    .panel-body .user-pic {
+        width: 55%;
+    }
+}
+
+
+@media (max-width: 1000px) and (min-width: 700px){
+    .img-responsive{
+            padding: 25%;
+            margin: -40% 0 -25% 0;
+         }
+}
+
+@media(max-width:420px){
+    
+    .img-circle{
+      max-width: 60% !important;
+    }
+
+}
+</style> 
+
+<div class="panel-body container" style="margin-top:100px;">
+                       <table><fieldset><legend style="text-align:center;font-size:45px;font-weight:500">My Account</legend></fieldset></table>
+                        <div class="row img-wrapper">
+                            <div class="col-md-3 col-lg-3 user-pic" align="center"> <img alt="User Pic" src="https://openclipart.org/image/2400px/svg_to_png/211821/matt-icons_preferences-desktop-personal.png"
+                                    class="img-circle img-responsive"> </div>
+
+
+                            <div class=" col-md-9 col-lg-9 well">
+                                <table class="table table-user-information ">
+                                    <tbody>
+                                        
+                                        <tr>
+
+                                            <td style="border-top:0px">First name</td>
+                                            <td style="border-top:0px">{{FirstName}}</td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td>Last Name</td>
+
+                                            <td>{{LastName}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Email</td>
+                                            <td>{{EmailId}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Mobile</td>
+                                            <td>{{Phoneno}}</td>
+                                        </tr>
+                                        
+                                    </tbody>
+                                </table>
+
+                                
+                            </div>
+                        </div>
+                    </div>
+<!-- </div>-->
