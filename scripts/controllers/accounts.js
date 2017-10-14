@@ -8,7 +8,22 @@
  * Controller of the halanxApp
  */
 angular.module('halanxApp')
-  .controller('AccountsCtrl', function ($scope,accounts) {
+  .controller('AccountsCtrl', function ($scope,accounts,$window) {
+     if(localStorage.getItem("isLogin") === null || JSON.parse(localStorage.getItem("isLogin"))==false){
+     $window.location.href = "#login";
+    }
+    if(localStorage.getItem("storedata")!=null){
+            var counter_length = JSON.parse(localStorage.getItem("storedata")).length;
+            $scope.counter = counter_length
+        }
+         else{
+            $scope.counter = 0;
+        }
+    $scope.menu = false;
+    $scope.movex = true;
+    $scope.addsidebar = ()=>{
+      $scope.movex = !$scope.movex;
+  }
          userinfo();
     function userinfo()
     {
@@ -28,7 +43,7 @@ angular.module('halanxApp')
     $scope.password = data.password
     }
       ,function(err){
-        alert("err");   
+           
     } 
     )
 }

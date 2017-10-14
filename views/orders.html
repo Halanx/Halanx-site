@@ -279,8 +279,13 @@ body{
     .move{
     transform: translateX(-500px);
     transition: 1s;
-    
     }
+
+    @media(max-width:767px) {
+    #content .userlist{
+        width: 75%;
+    }
+}
 
 .cart-icon {
     margin: 0;
@@ -330,7 +335,7 @@ body{
              <li><a href="#/favourite">Favourites</a></li>
              <li><a href="">Points</a></li>
              <li><a href="">Notification</a></li>
-             <li><a href="#/">Logout</a></li>
+             
              
          </ul>
         </div>
@@ -351,19 +356,22 @@ body{
 			<div class="panel-heading">
 				<div class="row">
 					<div class="col-sm-6">
-					<h2 class="heading active" onclick="tggg()" ng-click=myorder("ongoing")>Ongoing</h5>
+					<h2 class="heading" onclick="tggg(1)" ng-click=myorder("ongoing")>Ongoing</h5>
 					</div>
 
 					<div class="col-sm-6 ">
-					<h2 class="heading " onclick="tggg()" ng-click=myorder("delivered")>Delivered</h5>
+					<h2 class="heading active" onclick="tggg(2)" ng-click=myorder("delivered")>Delivered</h5>
 					</div>
 				</div>
 			 </div>
 			</div>
 		
 <div class="panel-body">
- <ul>
-<li class="orders" ng-repeat="i in orders">
+ <div ng-show="noongo">
+     <p>{{orderStat}}</p>
+ </div>
+    <ul>
+<li class="orders" ng-repeat="i in orders|orderBy:'PlacingTime':rev">
 <div class="orderid">order id: {{i.id}}</div>
     <div class="trackorder"><a ng-click="trackyourOrder(i)">Track Order</a></div>
 <ul>
@@ -404,17 +412,16 @@ body{
 </div>
 
     <script>
-        ctg = false;
-        function tggg() {
+        function tggg(ctg) {
             var head = document.getElementsByClassName('heading');
-            if(!ctg) {
+            if(ctg==2) {
                 head[0].classList.remove('active');
                 head[1].classList.add('active');
-                ctg = true;
+                ctg = false;
             } else {
                 head[0].classList.add('active');
                 head[1].classList.remove('active');
-                ctg = false;
+                ctg = true;
             }
         }
 

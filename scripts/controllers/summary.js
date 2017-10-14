@@ -22,7 +22,7 @@ angular.module('halanxApp')
                     var promise = summary.bill(token)
                           promise.then(function(data){
                     console.log(data);
-                    var totalwithex = parseInt(localStorage.getItem("amount"))+parseInt(data.DeliveryCharges)+ parseInt(localStorage.getItem("tax"));
+                    var totalwithex = JSON.parse(localStorage.getItem("amount"))+parseInt(data.DeliveryCharges)+ JSON.parse(localStorage.getItem("tax"));
                      $scope.cost = {
                   Total:localStorage.getItem("amount"),
                   DeliveryCharges:data.DeliveryCharges,
@@ -36,5 +36,11 @@ angular.module('halanxApp')
   
     } );
        
+  }
+  
+  $scope.payment = ()=>{
+    if(localStorage.getItem("amount") !=null && $scope.cost.Total != undefined){
+      $window.location = "../../payment.php";
     }
+  }
   });

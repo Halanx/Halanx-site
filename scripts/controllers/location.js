@@ -14,6 +14,9 @@ angular.module('halanxApp')
       'AngularJS',
       'Karma'
     ];
+     if(localStorage.getItem("isLogin") === null || JSON.parse(localStorage.getItem("isLogin"))==false){
+     $window.location.href = "#login";
+    }
     // $window.location.reload();
      $scope.showclass = false;
    $scope.movex = true;
@@ -32,7 +35,13 @@ $scope.addstore = ()=>{
      }
 
    $scope.postreq = ()=>{
+    //    console.log($scope.one);
+       if($scope.one!=undefined && $scope.two!=undefined && $scope.three!=undefined && $scope.four!=undefined){
        $window.location.assign("#summary");
+    }
+    else{
+        $scope.message = "Enter your location!";
+    }
    }  
 
   });

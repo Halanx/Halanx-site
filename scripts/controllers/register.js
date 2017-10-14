@@ -14,7 +14,9 @@ angular.module('halanxApp')
       'AngularJS',
       'Karma'
     ];
-
+    if(localStorage.getItem("isLogin") ==true){
+     $window.location.href = "#landing";
+    }
     $scope.firstnameError = false;
     $scope.lastnameError = false;
     $scope.emailError = false;

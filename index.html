@@ -79,8 +79,8 @@
         <div class="row row_11">
             <div class="col-md-3"></div>
             <div class="col-md-1   text-center"><a href="#/aboutus">About Us</a></div>
-            <div class="col-md-1  text-center"><a href="#">Careers</a></div>
-            <div class="col-md-1  text-center"><a href="#">Blog</a></div>
+            <div class="col-md-1  text-center"><a>Careers</a></div>
+            <div class="col-md-1  text-center"><a>Blog</a></div>
             <div class="col-md-1  text-center"><a href="#/contactus">Contact Us</a></div>
             <div class="col-md-1  text-center"><a href="#/privacy">Privacy</a></div>
             <div class="col-md-1  text-center"><a href="#/terms">Terms</a></div>
@@ -301,8 +301,12 @@ updateMarkerPosition(marker.getPosition());
         function showPosition(position) {
             lat = position.coords.latitude;
             lon = position.coords.longitude;
-            localStorage.setItem('lat',lat);
-            localStorage.setItem('lon',lon);
+            console.log("hey ")
+            var obj={"Latitude":lat,"Longitude":lon};
+            localStorage.setItem("obj",JSON.stringify(obj));
+            console.log(localStorage.getItem("obj"));
+            // localStorage.setItem('lat',lat);
+            // localStorage.setItem('lon',lon);
             latlon = new google.maps.LatLng(lat, lon);
             mapholder = document.getElementById('mapholder');
 
@@ -349,9 +353,14 @@ updateMarkerPosition(marker.getPosition());
     <!-- Search Location Redirect -->
     <script>
         function savedata(){
-            var array=[lat,lon];
-            localStorage.setItem('obj',array);
+           var obj={"Latitude":lat,"Longitude":lon};
+            localStorage.setItem("obj",JSON.stringify(obj));
+            localStorage.setItem("isLocated",true);
+            // var array=[lat,lon];
+            // localStorage.setItem('obj',array);
+
             window.location="#/landing";
+            location.reload();
         }
     </script>     
        

@@ -8,8 +8,10 @@
  * Controller of the halanxApp
  */
 angular.module('halanxApp')
-  .controller('FoodmainCtrl', function ($scope,foodmain) {
-    
+  .controller('FoodmainCtrl', function ($scope,foodmain,$window) {
+     if((localStorage.getItem("isLogin") === null || JSON.parse(localStorage.getItem("isLogin"))==false)&&(localStorage.getItem("isLocated")==null || localStorage.getItem("isLocated")==false)){
+     $window.location.href = "#login";
+    }
     
      $scope.showclass = false;
    $scope.movex = true;
@@ -31,7 +33,7 @@ angular.module('halanxApp')
              favdata();
        
       },function(err){
-        alert("err");   
+        // alert("err");   
     } )
          datalogo(id);
      }
@@ -61,7 +63,7 @@ angular.module('halanxApp')
   }
  }
       },function(err){
-        alert("err");   
+        // alert("err");   
     } ) 
         }
         else{
@@ -103,7 +105,7 @@ function load_id(){
 
         console.log($scope.storedata);
       },function(err){
-        alert("err");   
+        // alert("err");   
     } );
     }
       
@@ -132,7 +134,7 @@ $scope.addstore = ()=>{
         //$scope.productcat = JSON.parse(data.CategoriesAvailable);
         $scope.productcat=data.CategoriesAvailable;
       },function(err){
-        alert("err");   
+        // alert("err");   
     } );
      }
          
@@ -147,7 +149,7 @@ $scope.addstore = ()=>{
        var match =  foodmain.check(modal)
    
        if(match.length==1){
-          alert("already present in cart")
+        //   alert("already present in cart")
        }
         else{
         
@@ -169,7 +171,7 @@ $scope.addstore = ()=>{
         
     }
     $scope.addfav = (data)=>{
-        alert("Added to Favourites!");
+        // alert("Added to Favourites!");
         var val;
         data.FavoriteField = !data.FavoriteField;
          var token=foodmain.gettoken();
@@ -192,7 +194,7 @@ $scope.addstore = ()=>{
        
        
       },function(err){
-        alert("err");   
+        // alert("err");   
     } )
  
         }
@@ -216,7 +218,7 @@ $scope.addstore = ()=>{
        
        
       },function(err){
-        alert("err");   
+        // alert("err");   
     } )  
             
             
@@ -288,7 +290,7 @@ $scope.addstore = ()=>{
           
              }
       },function(err){
-        alert("err");   
+        // alert("err");   
     } )
      }
     

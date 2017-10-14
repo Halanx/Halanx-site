@@ -9,6 +9,9 @@
  */
 angular.module('halanxApp')
   .controller('FavouriteCtrl', function ($scope,favourite,$window) {
+       if(localStorage.getItem("isLogin") === null || JSON.parse(localStorage.getItem("isLogin"))==false){
+     $window.location.href = "#login";
+    }
 
     $scope.movex = true;
     $scope.checkFav = true;

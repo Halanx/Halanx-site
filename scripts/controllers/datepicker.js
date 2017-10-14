@@ -9,7 +9,31 @@
  */
 angular.module('halanxApp')
   .controller('DatepickerCtrl', function ($scope,datepicker,$window) {
+       if(localStorage.getItem("isLogin") === null || JSON.parse(localStorage.getItem("isLogin"))==false){
+     $window.location.href = "#login";
+    }
+
+    function todayDate(){
+var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth()+1; //January is 0!
+var yyyy = today.getFullYear();
+
+if(dd<10) {
+    dd = '0'+dd
+} 
+
+if(mm<10) {
+    mm = '0'+mm
+} 
+    var today = yyyy+"-"+mm+"-"+dd;
+    localStorage.setItem("DeliveryDate",today);
+    console.log(today);
+	
+}
+
          autocall();
+         todayDate();
          $scope.dateError = false;
         function autocall(){
             $scope.desired = datepicker.desired();
@@ -40,8 +64,10 @@ angular.module('halanxApp')
      var date = $("#hw_datepicker").val()
 //                 var obj = {};
        var DeliveryDate =date
+       if(DeliveryDate!=""&&DeliveryDate!=null){
                    localStorage.setItem('DeliveryDate',DeliveryDate)
-//                 console.log(obj.date)
+//                 console.log(obj.date)}
+       }
                   var data= datepicker.gettrue($scope.desired)
                  if(date=="" && data.service=="schedule for later"){
                      $scope.dateError = "true";
@@ -52,7 +78,8 @@ angular.module('halanxApp')
                      var time =  datepicker.gettrue($scope.time)
                      var StartTime=time.timing
                       localStorage.setItem('StartTime',StartTime)
-                      localStorage.setItem('AsSoonAsPossible',"")
+                      localStorage.setItem('AsSoonAsPossible',"");
+        
 //                  console.log( obj.schedule)
                 $window.location.reload();  
                  $window.location.href = "#location";
@@ -60,8 +87,8 @@ angular.module('halanxApp')
                  else{
                      
                      var AsSoonAsPossible = "true";
-                      localStorage.setItem('AsSoonAsPossible',AsSoonAsPossible)
-                      localStorage.setItem('StartTime',"null")
+                      localStorage.setItem('AsSoonAsPossible',AsSoonAsPossible);
+                      localStorage.setItem('StartTime',"null");
                     var StartTime=  new Date(new Date().getTime()).toLocaleTimeString();
                      
                       localStorage.setItem('StartTime',StartTime)

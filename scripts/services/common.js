@@ -10,6 +10,7 @@
 angular.module('halanxApp')
   .factory('common', function () {
       return {
-     isLogin:false
+     isLogin:false,
+     isLocated:false
    };
   });

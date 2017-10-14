@@ -37,6 +37,14 @@ angular.module('halanxApp')
            }
           
         }, true);
+
+        
+        if(localStorage.getItem("isLocated")!=null){
+          if(localStorage.getItem("isLocated") == true){
+            common.isLocated = true;
+          }
+        }
+       
     if(common.isLogin){
     $scope.index.login = true;
     $scope.index.logout = false;

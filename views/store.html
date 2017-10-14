@@ -92,36 +92,29 @@
     margin-right: -15px;
     box-shadow: 0 0 8px rgba(0,0,0,0.19), 0 0 11px rgba(0,0,0,0.1);
     animation-name: move;
-    animation-duration: 50s;
+    animation-duration: 15s;
     animation-iteration-count: infinite;
     animation-timing-function: linear;
     background-repeat: no-repeat;
 }
 
 @keyframes move {
-    0% {
+    0%,30% {
         background-image: url(../images/store1.jpg);
         background-color:rgba(0,0,0,0.7);
         background-position: center;
         background-size: cover;
         background-attachment: fixed;
     }
-    40% {
+    50%,70% {
         background-image: url(../images/store2.jpg);
         background-color:rgba(0,0,0,0.7);
         background-position: center;
         background-size: cover;
         background-attachment: fixed;
     }
-    70% {
+    95%,100% {
         background-image: url(../images/store1.jpg);
-        background-color:rgba(0,0,0,0.6);
-        background-position: center;
-        background-size: cover;
-        background-attachment: fixed;
-    }
-    100% {
-        background-image: url(../images/store2.jpg);
         background-color:rgba(0,0,0,0.7);
         background-position: center;
         background-size: cover;

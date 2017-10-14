@@ -8,8 +8,19 @@
  * Controller of the halanxApp
  */
 angular.module('halanxApp')
-  .controller('FoodCtrl', function ($scope,food) {
-
+  .controller('FoodCtrl', function ($scope,food,$window) {
+       if((localStorage.getItem("isLogin") === null || JSON.parse(localStorage.getItem("isLogin"))==false)&&(localStorage.getItem("isLocated")==null || localStorage.getItem("isLocated")==false)){
+     $window.location.href = "#login";
+    }
+    //  $scope.$watch(function(){return $scope.mystore}, function (newValue, oldValue) {
+         
+    //        if(newValue!=oldValue){
+    //          food1=$scope.mystore;
+    //        }
+           
+          
+    //     }, true);
+    var food1 = [];
     console.log(food.msg);
      $scope.showclass = false;
     $scope.menu = false;
@@ -21,18 +32,19 @@ angular.module('halanxApp')
    
    $scope.counter= food.loadcounter();
    console.log($scope.counter);
-    $scope.mystore= function(id){
+    
+     $scope.mystore= function(id){
          food.saveid(id);
         var promise =  food.productserver(id);
          promise.then(function(data){
         console.log(data)
 
-
+        // food1=data;
        $scope.mydata = data;
              favdata()
        
       },function(err){
-        alert("err");   
+        // alert("err");   
     } )
          datalogo(id);
      }
@@ -62,7 +74,7 @@ angular.module('halanxApp')
   }
  }
       },function(err){
-        alert("err");   
+        // alert("err");   
     } ) 
         }
         else{
@@ -110,7 +122,7 @@ function load_id(){
 
         console.log($scope.storedata);
       },function(err){
-        alert("err");   
+        // alert("err");   
     } );
     }
       
@@ -121,6 +133,11 @@ $scope.addstore = ()=>{
     $scope.showclass = !$scope.showclass;
     
 }
+
+$scope.scrollDown = function(){
+    console.log("aaya");
+	    $('html, body').animate({ scrollTop: $("#product-list-wrapper").offset().top - 170 }, 550);
+	}
     
 
      $scope.addmodal = (data)=>{
@@ -140,7 +157,7 @@ $scope.addstore = ()=>{
         $scope.StoreName= data.StoreName
        
       },function(err){
-        alert("err");   
+        // alert("err");   
     } );
      }
          
@@ -159,7 +176,7 @@ $scope.addstore = ()=>{
        var match =  food.check(modal)
    
        if(match.length==1){
-          alert("already present in cart")
+        //   alert("already present in cart")
        }
         else{
         modal.quantity = q;
@@ -227,7 +244,7 @@ $scope.addstore = ()=>{
        
        
       },function(err){
-        alert("err");   
+        // alert("err");   
     } )  
             
             
@@ -235,8 +252,9 @@ $scope.addstore = ()=>{
     }
     
      $scope.search = ()=>{
-         console.log("hello")
-        console.log($scope.store)
+         console.log($scope.enter);
+        console.log($scope.store);
+        
        var promise =  food.searchlist($scope.enter)
            promise.then(function(data){
         console.log(data);
@@ -249,14 +267,39 @@ $scope.addstore = ()=>{
     } );
     }
      $scope.getsearch = (product)=>{
-         console.log(product._source.Id)
-         console.log($scope.mydata)
-       var filterdata = $scope.mydata.filter(function(obj){
-            return obj.id == product._source.Id
-        })
-       console.log(filterdata)
-//     $scope.addmodal(filterdata[0])
-       $scope.mydata = filterdata;
+         console.log(product._id);
+         console.log($scope.mydata);
+         datalogo(product._source.StoreId);
+         $scope.mystore(product._source.StoreId);
+          food.saveid(product._source.StoreId);
+        var promise =  food.productserver(product._source.StoreId);
+         promise.then(function(data){
+        console.log(data)
+
+        // food1=data;
+       var filterdata = data.filter(function(obj){
+            return obj.id == product._id;
+        });
+        $scope.mydata = filterdata;
+             favdata()
+       
+      },function(err){
+        // alert("err");   
+    } )
+        //  datalogo(product._source.StoreId);
+        for(var i =0 ; i<50000;i++){
+            var count = $scope.mydata.length+1;
+        }
+         console.log(food1);
+       if(product._id!=null||product!=undefined){
+           loadNewProd(product._id);    
+       }
+     };
+
+     function loadNewProd(id){
+         console.log($scope.mydata);
+        
+        
      }
  
      function jquery(){
@@ -294,7 +337,7 @@ $scope.addstore = ()=>{
           
              }
       },function(err){
-        alert("err");   
+        // alert("err");   
     } )
      }
    

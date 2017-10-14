@@ -785,7 +785,7 @@ div.scrollmenu li {
                 <div id="searchbox-wrapper">
                     <input type="text" class="form-control" placeholder="Search your products" ng-change="search()" ng-model="enter">
                      <ul>
-                        <li ng-repeat="i in listdata" data-toggle="modal" data-target="#exampleModalLong" ng-click="getsearch(i)">
+                        <li ng-repeat="i in listdata track by $index" data-toggle="modal" data-target="#exampleModalLong" ng-click="getsearch(i);scrollDown(); ">
                             <a href="">{{i._source.ProductName}}</a>
                         </li>
                     </ul>
@@ -829,7 +829,7 @@ div.scrollmenu li {
             <div class="col-sm-12">
                  <div class="productcat scrollmenu" >
                       <ul>
-                          <li ng-repeat="i in productcat" ng-click="catwise(i)" class="category">
+                          <li ng-repeat="i in productcat track by $index" ng-click="catwise(i)" class="category">
                               {{i}}
                           </li>
                       </ul>
@@ -841,7 +841,6 @@ div.scrollmenu li {
         
         <br>
         <br><br>
-                
 	                      
 	 <div id="content" name="toTop" id="toPos">
 	           <div class="container-fluid bg22" name="toTop" id="toPos">
@@ -859,7 +858,7 @@ div.scrollmenu li {
 	                            <li><a href="#/favourite">Favourites</a></li>
 	                            <li><a href="">Points</a></li>
 	                            <li><a href="">Notification</a></li>
-	                            <li><a href="#/">Logout</a></li>
+	                            
 	                            
 	                        </ul>
 	                       </div>
@@ -938,7 +937,7 @@ div.scrollmenu li {
            </div>
            
            <div id="product-list-wrapper">
-                <div class="product-list" ng-repeat="data in mydata">
+                <div class="product-list" ng-repeat="data in mydata track by $index">
                     <div class="product-head">
                         <!-- <img class="product-image" src="{{data.ProductImage}}"> -->
                         <!-- <img class="product-image" src="../images/homepage1.jpg"> -->
@@ -1035,5 +1034,7 @@ function tg() {
         tga = false;
     }
 }
+
+
     
 	</script>

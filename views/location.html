@@ -3,6 +3,19 @@ body {
     overflow-x: hidden;
 }     
 
+#searchTextField{
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+}
+
 .icon-bar{
  background:#d6d6d6;
 }
@@ -94,70 +107,33 @@ body {
                     <div class="panel-heading" style="background:rgb(200,65,62) !important;">
                         <div class="panel-title" style="color:white">Enter Delivery Location</div>
                      </div>     
-
+                     <div id="infoPanel">
+                     <input id="info" type="hidden" size="50" value=""/>
                     <div style="padding-top:30px" class="panel-body" >
 
                         <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
-                            
+                            <div class="form-group">
+                             
                         <div id="loginform" class="form-horizontal" >
                                     
                             <div style="margin-bottom: 25px" class="input-group">
-                                        
-                                <input id="searchTextField" class="form-control" type="text" placeholder="Enter Delivery Location">
+                                 
+                                   
+                                <input id="searchTextField" class="form-control" type="text" placeholder="Enter Delivery Location" ng-model="one">
    				<span class="input-group-btn">
    				<button class="btn btn-danger btn-md" type="button">
    				<i class="glyphicon glyphicon-search"></i>
    				</button>
    				</span>
-                                   
+                                   </div>
+                                   </div>
                                     </div>
                                 
                             <div style="margin-bottom: 25px; width:100%;" class="input-group container">
                             <div id="mapCanvas"></div>
 
                                     </div>
-                           
-                            
-<!--                              <div class="panel-heading">-->
-                        <div class="panel-title">Enter Delivery Address</div>
-<!--                     </div>  -->
-                            <br>
-                            <!--action="https://www.halanx.com/halanx-final/new1big-kfc/summary/summary.html"-->
-                            <form method="post" >                            
-                            <div style="margin-bottom: 25px" class="input-group">
-                            
-                                       
-                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                        <input type="text" class="form-control" id="flatnumber" placeholder="House/Flat No.">
-                                    </div>
-                            <div style="margin-bottom: 25px" class="input-group">
-                            
-                                       
-                                        <span class="input-group-addon"><i class="fa fa-location-arrow" aria-hidden="true"></i></span>
-                                        <input type="text" class="form-control" id="area" size="50" placeholder="Area" required>
-                                    </div>
-                            <div style="margin-bottom: 25px" class="input-group">
-                            
-                                       
-                                        <span class="input-group-addon"><i class="fa fa-home" aria-hidden="true"></i></span>
-                                        <input type="text" class="form-control" id="city"  size="50" required placeholder="City">
-                                    </div> 
-                                                           
-                             <div class="col-sm-12 controls" style="text-align:Center">
-                                    
-                                      <button type="submit" class="btn btn-danger btn-md b1" id="submit" ng-click="postreq()">Continue</button>
-                            </div>    
-                            </form>    
-                             
-                            </div>     
-
-
-
-                        </div>                     
-                    </div>  
-        </div>
-     </div>
-              <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDXnunhscL2jKBg62KkqAhJwSMXhDoN9DE&libraries=places"></script>
+                           <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDXnunhscL2jKBg62KkqAhJwSMXhDoN9DE&libraries=places"></script>
     <script>
     var geocoder = new google.maps.Geocoder();       
 
@@ -192,7 +168,7 @@ body {
             function initialize() {
                 var latLng = new google.maps.LatLng(28.6139,77.2090);
                 var map = new google.maps.Map(document.getElementById('mapCanvas'), {
-                    zoom: 15,
+                    zoom: 6,
                     center: latLng,
                     mapTypeId: google.maps.MapTypeId.ROADMAP,
                     streetViewControl: false,
@@ -229,7 +205,7 @@ body {
                 });
                 
                 google.maps.event.addListener(autocomplete, 'place_changed', function() {
-//                    input.className = '';
+                    input.className = '';
           var place = autocomplete.getPlace();
           if (!place.geometry) {
             // Inform the user that the place was not found and return.
@@ -255,8 +231,49 @@ updateMarkerPosition(marker.getPosition());
             google.maps.event.addDomListener(window, 'load', initialize);
     </script>
 
+                            
+<!--                              <div class="panel-heading">-->
+                        <div class="panel-title">Enter Delivery Address</div>
+<!--                     </div>  -->
+                            <br>
+                            <!--action="https://www.halanx.com/halanx-final/new1big-kfc/summary/summary.html"-->
+                            <form method="post" >                            
+                            <div style="margin-bottom: 25px" class="input-group">
+                            
+                                       
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                        <input type="text" class="form-control" id="flatnumber" placeholder="House/Flat No." ng-model="two">
+                                    </div>
+                            <div style="margin-bottom: 25px" class="input-group">
+                            
+                                       
+                                        <span class="input-group-addon"><i class="fa fa-location-arrow" aria-hidden="true"></i></span>
+                                        <input type="text" class="form-control" id="area" size="50" placeholder="Area" required ng-model="three">
+                                    </div>
+                            <div style="margin-bottom: 25px" class="input-group">
+                            
+                                       
+                                        <span class="input-group-addon"><i class="fa fa-home" aria-hidden="true"></i></span>
+                                        <input type="text" class="form-control" id="city"  size="50" required placeholder="City" ng-model="four">
+                                    </div> 
+                                                           
+                             <div class="col-sm-12 controls" style="text-align:Center">
+                                    
+                                      <button type="submit" class="btn btn-danger btn-md b1" id="submit" ng-click="postreq()">Continue</button>
+                                      <br>
+                                      <span style="color:red !important;">{{message}}</span>
+                            </div>    
+                            </form>    
+                             
+                            </div>     
 
-          <script>
+
+
+                        </div>                     
+                    </div>  
+        </div>
+     </div>
+   <script>
      $(document).ready(function(){
      $("#submit").click(function(){
 
@@ -269,9 +286,8 @@ updateMarkerPosition(marker.getPosition());
      });
    });
 
-     </script>
- 
- <script>
+     </script>            
+  <script>
 $(function(){
 
   // name your elements here

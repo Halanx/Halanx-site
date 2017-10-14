@@ -8,12 +8,30 @@
  * Controller of the halanxApp
  */
 angular.module('halanxApp')
-  .controller('LandingCtrl', function ($scope,landing) {
+  .controller('LandingCtrl', function ($scope,landing,common,$window) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
+     if((localStorage.getItem("isLogin") === null || JSON.parse(localStorage.getItem("isLogin"))==false)&&(localStorage.getItem("isLocated")==null || localStorage.getItem("isLocated")==false)){
+     $window.location.href = "#login";
+    }
+
+
+        if(localStorage.getItem("isLocated")!=null){
+          
+            common.isLocated = JSON.parse(localStorage.getItem("isLocated"));
+          
+        }
+
+        if(localStorage.getItem("storedata")!=null){
+            var counter_length = JSON.parse(localStorage.getItem("storedata")).length;
+            $scope.counter = counter_length
+        }
+         else{
+            $scope.counter = 0;
+        }
     storename();
 
     $scope.movex = true;
@@ -37,7 +55,7 @@ angular.module('halanxApp')
          $scope.grocery= Grocery;
         console.log($scope.stores)
       },function(err){
-        alert("err");   
+        // alert("err");   
     } );
     }
     // console.log(store);
@@ -68,10 +86,10 @@ angular.module('halanxApp')
         console.log(store._source.Id)
        if(store._source.StoreCategory=="Food"){
             
-             window.location = "#/food"
+             $window.location.assign("#/food");
         }
         else if(store._source.StoreCategory=="Grocery"){
-            window.location = "#/foodmain"
+            $window.location.assign("#/foodmain");
         }
     }
   });

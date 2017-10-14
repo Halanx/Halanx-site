@@ -15,6 +15,8 @@ angular.module('halanxApp')
       'Karma'
     ];
 
+    
+
     $scope.mobileError = false;
     $scope.passwordError = false;
 
@@ -38,7 +40,7 @@ angular.module('halanxApp')
       $scope.submitform = ()=>{
         $scope.loginVerify();
         $scope.mismatchError = false;
-    
+        console.log(common.isLocated);
         if($scope.mobileError==false && $scope.passwordError==false) {
         var obj = {};
         
@@ -60,7 +62,17 @@ angular.module('halanxApp')
                    
                       common.isLogin=true;
                       localStorage.setItem("isLogin",common.isLogin);
-                      $window.location.href="#landing";
+                      console.log(common.isLocated);
+                      if(common.isLocated == true){
+                         localStorage.setItem("isLocated",false);
+                         $window.location.href="#cart";
+                           }
+
+                           
+                       else{
+                          $window.location.href="#landing";
+                       }    
+                      
                       
                 }
             },(err)=>{
@@ -92,7 +104,15 @@ angular.module('halanxApp')
            if(data.status==200){
            common.isLogin = true; 
            localStorage.setItem("isLogin",common.isLogin);
-           $window.location.assign("#landing");
+            if(common.isLocated == true){
+                         localStorage.setItem("isLocated",false);
+                         $window.location.href="#cart";
+                           }
+
+                           
+                       else{
+                          $window.location.href="#landing";
+                       }    
            }
          },function(err){
             console.log(err);

@@ -9,9 +9,10 @@
  */
 angular.module('halanxApp')
   .controller('CartCtrl', function ($scope,cart, $window) {
-      if(localStorage.getItem("isLogin") === null || JSON.parse(localStorage.getItem("isLogin"))==false){
+     if((localStorage.getItem("isLogin") === null || JSON.parse(localStorage.getItem("isLogin"))==false)&&(localStorage.getItem("isLocated")==null || localStorage.getItem("isLocated")==false)){
      $window.location.href = "#login";
     }
+    $scope.totalamount=0;
      autoload();
     userid();
     
@@ -34,21 +35,27 @@ angular.module('halanxApp')
     
     function autoload()
  {
-       
+     
      $scope.cartproductlist = cart.load();
+     if($scope.cartproductlist!=null){
      console.log($scope.cartproductlist)
     $scope.totalamount   = cart.calculatetotal($scope.cartproductlist);
     $scope.totaltax = cart.calculatetax($scope.cartproductlist);
      localStorage.setItem("amount",$scope.totalamount);
-                localStorage.setItem("tax",$scope.totaltax);
+     localStorage.setItem("tax",$scope.totaltax);
     if($scope.cartproductlist.length==0){
-        $scope.cartclass = true;
+          $scope.cartclass = true;
           $scope.emptyclass = false;    
     }
      else{
           $scope.emptyclass = true;
      $scope.cartclass = false;
+    }
      }
+     else{
+          $scope.emptyclass = false;
+          $scope.cartclass = true;
+    }
  }
     function userid(){
         if(localStorage.token){
@@ -87,7 +94,8 @@ angular.module('halanxApp')
     }
      else{
           $scope.emptyclass = true;
-     $scope.cartclass = false;
+          $scope.cartclass = false;
+          $scope.totalamount=0;
      }
     }
     

@@ -8,8 +8,18 @@
  * Controller of the halanxApp
  */
 angular.module('halanxApp')
-  .controller('OrdersCtrl', function ($scope,orders) {
-
+  .controller('OrdersCtrl', function ($scope,orders,$window) {
+       if(localStorage.getItem("isLogin") === null || JSON.parse(localStorage.getItem("isLogin"))==false){
+     $window.location.href = "#login";
+    }
+    if(localStorage.getItem("storedata")!=null){
+            var counter_length = JSON.parse(localStorage.getItem("storedata")).length;
+            $scope.counter = counter_length
+        }
+        else{
+            $scope.counter = 0;
+        }
+    $scope.rev = true;
     $scope.menu = false;
     $scope.movex = true;
 
@@ -45,17 +55,17 @@ angular.module('halanxApp')
             $scope.toggleRec = false;
             $scope.trackStatus = "Order Recieved";
         } else {
-            if(data[0].IsDelivered==true) {
+            if(data[0].IsDelivered==false) {
                 console.log("delivered");
-                $scope.trackStatus = "Order Delivered";
+                $scope.trackStatus = "On Going";
                 $scope.delby = ((data[0].ShopperId).user).first_name +" "+ ((data[0].ShopperId).user).last_name;
                 $scope.orderItems = data[0].items;
                 $scope.shopperMo = (data[0].ShopperId).PhoneNo;
-                $scope.toggleDeliver = false;
-            }else if(data[0].IsDelivered==false) {
-                console.log("ongoing");
-                $scope.trackStatus = "On Going";
                 $scope.toggleOnGo = false;
+            }else if(data[0].IsDelivered==true) {
+                console.log("ongoing");
+                $scope.trackStatus = "Order Delivered";
+                $scope.toggleDeliver = false;
             }
         }
       },function(err){
@@ -71,30 +81,64 @@ angular.module('halanxApp')
         var promise = orders.getorderon(token);
         
         if(check=="ongoing"){
-             
+            $scope.noongo=false;
+             var filterdata = [];
+             var k=0;
             promise.then(function(data){
         console.log(data);
-             var filterdata = data.filter((obj)=>{
-                            return obj.IsDelivered == false;
-                            });
+                for(var i=0;i<data.length;i++){
+                     for(var j=0;j<data[i].order_items.length;j++){
+                          if(data[i].order_items[j].IsDelivered==false){
+                            //   console.log(data[i]);
+                              filterdata[k] = data[i];
+                              k++;
+                              break;
+                                }  
+                                    }
+                                         }
+            //  var filterdata = data.filter((obj)=>{
+            //                 return obj.IsDelivered == true;
+            //                 });
              console.log(filterdata)
         $scope.orders = filterdata;
+        if(filterdata=="") {
+            $scope.noongo=true;
+            $scope.orderStat = "You have no ongoing orders. Please order."
+        }
       },function(err){
   
     } ); 
         }
         else if(check=="delivered"){
-              
+             var filterdata1 = [];
+             var m=0;
+             $scope.noongo=false;
             promise.then(function(data){
         console.log(data);
-             var filterdata = data.filter((obj)=>{
-                            return obj.IsDelivered == true;
-                            });
-             console.log(filterdata)
-        $scope.orders = filterdata;
+        for(var i=0;i<data.length;i++){
+                     for(var j=0;j<data[i].order_items.length;j++){
+                          if(data[i].order_items[j].IsDelivered==true){
+                            //   console.log(data[i]);
+                              filterdata1[m] = data[i];
+                              m++;
+                              break;
+                                }  
+                                    }
+                                         }
+            //  var filterdata = data.filter((obj)=>{
+            //                 return obj.IsDelivered == false;
+            //                 });
+             console.log(filterdata1)
+        $scope.orders = filterdata1;
+        if(filterdata1=="") {
+        $scope.noongo=true;
+        $scope.orderStat = "You have no delivered orders."
+    }
       },function(err){
   
     } );
+    
+    
         }
         else{
                promise.then(function(data){
@@ -107,6 +151,10 @@ angular.module('halanxApp')
       },function(err){
   
     } )  
+    if(filterdata=="") {
+        $scope.noongo=true;
+        $scope.orderStat = "You have no delivered orders."
+    }
         }
         
     }
