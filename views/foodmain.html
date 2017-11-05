@@ -74,11 +74,6 @@ z-index:1000;
     padding-top: 46px;
 }
 
-@media(max-width:767px) {
-    #content .userlist{
-        width: 75%;
-    }
-}
     
 .nav-button .sidebutton {
     position: fixed;
@@ -394,27 +389,21 @@ button.btn.btn-sm.btn-danger.btn-circle {
     text-transform: capitalize;
 }
 #content .datasection .productcat ul{
-  display:flex;
-  flex-wrap:wrap;
-  margin-left: 8px;
-  margin-top: 23px;
+  /* display:flex;
+  flex-wrap:wrap; */
+  /* margin-left: 33px; */
+  margin-top: 22px;
 }
-#content .datasection .productcat li{
-   height: 61px;
-   border-radius: 89px;
-   padding: 12px;
-   width: 121px;
+
+.productcat ul li:hover {
+    color: #fff;
+    background: rgba(220,10,10,0.91);
 }
 #content .datalist .productcat .colorred{
 background-color: #e50000;
 border: 2px solid #d3d3d3;
 cursor:pointer;
 color:#ffffff;
-}
-.productcat ul li:hover{
-cursor:pointer;
-border:2px solid #000000;
-
 }
 @media(max-width:380px){
 #content .datasection .productdescription span{
@@ -572,20 +561,12 @@ width: 220px;
         cursor:pointer;
         color:#ffffff;
     }
-    .productcat ul li{
-      background:#f6f6f6;
-    }
      
     .productcat ul{
        
       display:flex;
       flex-wrap:no-wrap;
        
-       
-    }
-    .productcat ul li:hover{
-      cursor:pointer;
-      border:2px solid #000000;
        
     }
 
@@ -687,11 +668,6 @@ padding: 0px 50px;
     border: 1px solid #d5d5d5;
 }
 
-
-.productcat ul li:hover {
-    background: rgba(220,10,10,0.91);
-}
-
 #content .userlist {
     background: none;
 }
@@ -748,6 +724,7 @@ padding: 0px 50px;
 
 .product-list .product-feature {
     color: #333;
+    min-height: 20px;
     text-align: left;
 }
 
@@ -810,6 +787,24 @@ padding: 0px 50px;
     padding: 5px 15px;
     outline: none;
 }
+
+#search-wrapper ul li {
+    list-style-type: none !important;
+}
+
+div.scrollmenu {
+    overflow-x: auto;
+    white-space: nowrap;
+    margin-bottom: 20px;
+    margin-top: -10px;
+}
+
+div.scrollmenu li {
+    display: inline-block;
+    text-align: center;
+    padding: 10px;
+    text-decoration: none;
+}
 </style>
 
 <!------------------------------>
@@ -837,9 +832,9 @@ padding: 0px 50px;
            <div class="container-fluid bg1" name="toTop" id="toPos">
                <div class="row">
                    <div class=" col-lg-3 col-md-3 col-sm-4 col-12">
-                       <div class="nav-button" ng-hide="menu">
+                       <div class="nav-button" ng-hide="menu" onclick="tg()">
                            <span ng-click="addsidebar()" class="sidebutton">
-                               <i class="fa fa-bars" aria-hidden="true" onclick="tg()"></i>
+                               <i class="fa fa-bars" aria-hidden="true"></i>
                          </span>
                        </div>
                        <div id="menu_list" class="userlist" ng-class={"move":movex}>
@@ -898,7 +893,7 @@ padding: 0px 50px;
 <div class="row">
 <div class="col-md-12 col-sm-12">
 <span class="storename">{{StoreName}}</span>
-   <div class="productcat">
+   <div class="productcat scrollmenu">
       <ul>
           <li ng-repeat="i in productcat" ng-click="catwise(i)" class="category">
               {{i}}
